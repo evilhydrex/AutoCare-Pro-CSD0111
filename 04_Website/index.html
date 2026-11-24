@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoCare Pro | Workshop Management</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><div><strong>AutoCare Pro</strong><small>Workshop Management</small></div></div>
+    <div class="top-note">Automobile Service Station</div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <p class="nav-heading">MAIN MENU</p>
+      <button class="nav-link active" data-section="dashboard">Dashboard</button>
+      <button class="nav-link" data-section="inventory">Inventory</button>
+      <button class="nav-link" data-section="billing">Billing</button>
+      <button class="nav-link" data-section="reports">Reports</button>
+      <div class="sidebar-bottom"><span class="status-dot"></span> Local data storage</div>
+    </aside>
+
+    <main class="content">
+      <section id="dashboard" class="page active-page">
+        <div class="page-heading"><div><p class="eyebrow">OVERVIEW</p><h1>Dashboard</h1><p class="muted">A quick look at your workshop inventory.</p></div><span class="date-label" id="todayLabel"></span></div>
+        <div class="stats-grid">
+          <article class="stat-card"><p>Total Products</p><h2 id="totalProducts">0</h2><small>Items in inventory</small></article>
+          <article class="stat-card"><p>Stock Value</p><h2 id="stockValue">₹0</h2><small>Based on current quantity</small></article>
+          <article class="stat-card"><p>Low Stock Items</p><h2 id="lowStockCount">0</h2><small>Quantity at or below 10</small></article>
+          <article class="stat-card"><p>Invoices Created</p><h2 id="invoiceCount">0</h2><small>Saved in this browser</small></article>
+        </div>
+        <div class="panel">
+          <div class="panel-heading"><div><h2>Inventory Snapshot</h2><p class="muted">A sample of the items currently in stock.</p></div><button class="secondary-btn" data-go="inventory">View Inventory</button></div>
+          <div class="table-wrap"><table><thead><tr><th>Part ID</th><th>Part Name</th><th>Quantity</th><th>Unit Price</th><th>Status</th></tr></thead><tbody id="dashboardTable"></tbody></table></div>
+        </div>
+      </section>
+
+      <section id="inventory" class="page">
+        <div class="page-heading"><div><p class="eyebrow">STOCK CONTROL</p><h1>Inventory</h1><p class="muted">Add and maintain workshop spare parts.</p></div><button class="primary-btn" id="addPartBtn">Add New Part</button></div>
+        <div class="toolbar"><input id="searchInput" type="search" placeholder="Search by part name or ID..."><span id="inventoryCount" class="muted"></span></div>
+        <div class="panel"><div class="table-wrap"><table><thead><tr><th>ID</th><th>Part Name</th><th>Quantity</th><th>Unit Price</th><th>Status</th><th>Actions</th></tr></thead><tbody id="inventoryTable"></tbody></table></div></div>
+        <div class="form-panel" id="partFormPanel">
+          <div class="panel-heading"><div><h2 id="formTitle">Add New Part</h2><p class="muted">Enter the spare part details below.</p></div><button class="icon-btn" id="closeFormBtn" aria-label="Close">×</button></div>
+          <form id="partForm">
+            <input type="hidden" id="partId">
+            <label>Part Name<input id="partName" type="text" required maxlength="60" placeholder="e.g. Air Filter"></label>
+            <div class="form-row"><label>Quantity<input id="partQuantity" type="number" min="0" required placeholder="e.g. 25"></label><label>Unit Price (₹)<input id="partPrice" type="number" min="0.01" step="0.01" required placeholder="e.g. 450"></label></div>
+            <div class="form-actions"><button type="button" class="secondary-btn" id="cancelFormBtn">Cancel</button><button type="submit" class="primary-btn">Save Part</button></div>
+          </form>
+        </div>
+      </section>
+
+      <section id="billing" class="page">
+        <div class="page-heading"><div><p class="eyebrow">CUSTOMER SERVICE</p><h1>Billing</h1><p class="muted">Create a simple invoice and update stock.</p></div></div>
+        <div class="billing-grid">
+          <div class="panel">
+            <h2>New Invoice</h2>
+            <form id="billingForm">
+              <label>Customer Name<input id="customerName" type="text" required placeholder="Enter customer name"></label>
+              <label>Select Spare Part<select id="billPart"></select></label>
+              <div class="form-row"><label>Quantity<input id="billQuantity" type="number" min="1" value="1" required></label><div class="add-to-bill-wrap"><button class="secondary-btn full-btn" id="addToBillBtn" type="button">Add Item to Bill</button></div></div>
+              <div class="cart-box">
+                <div class="cart-heading"><strong>Bill Items</strong><span id="cartItemCount" class="muted">0 items</span></div>
+                <div class="table-wrap"><table><thead><tr><th>Part</th><th>Qty</th><th>Price</th><th>Amount</th><th></th></tr></thead><tbody id="cartTable"><tr><td colspan="5" class="empty-row">No items added yet.</td></tr></tbody></table></div>
+              </div>
+              <label>Discount (%)<input id="discountPercent" type="number" min="0" max="100" value="0"></label>
+              <button class="primary-btn full-btn" type="submit">Generate Invoice</button>
+            </form>
+            <p class="small-note">Add multiple spare parts to one bill. Stock is updated only after the invoice is generated successfully.</p>
+          </div>
+          <div class="panel invoice-preview" id="invoicePreview">
+            <div class="invoice-placeholder"><h2>Invoice Preview</h2><p class="muted">Your generated invoice will appear here.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="reports" class="page">
+        <div class="page-heading"><div><p class="eyebrow">SUMMARY</p><h1>Reports</h1><p class="muted">Basic inventory and sales summaries.</p></div></div>
+        <div class="stats-grid two-stats">
+          <article class="stat-card"><p>Total Inventory Units</p><h2 id="totalUnits">0</h2><small>Sum of all available quantities</small></article>
+          <article class="stat-card"><p>Total Sales</p><h2 id="totalSales">₹0</h2><small>From invoices created in this browser</small></article>
+        </div>
+        <div class="panel"><div class="panel-heading"><div><h2>Low Stock Report</h2><p class="muted">Parts with 10 or fewer units.</p></div></div><div class="table-wrap"><table><thead><tr><th>Part Name</th><th>Quantity</th><th>Unit Price</th></tr></thead><tbody id="lowStockTable"></tbody></table></div></div>
+        <div class="panel"><div class="panel-heading"><div><h2>Recent Invoices</h2><p class="muted">Latest invoices saved locally.</p></div></div><div class="table-wrap"><table><thead><tr><th>Invoice No.</th><th>Customer</th><th>Date</th><th>Amount</th></tr></thead><tbody id="recentInvoices"></tbody></table></div></div>
+      </section>
+      
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
