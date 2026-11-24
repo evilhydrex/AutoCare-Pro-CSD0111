@@ -35,18 +35,16 @@ AutoCare Pro is a beginner-level browser application for managing spare-parts in
 ## Important notes
 - This is an educational front-end mini-project. It does not use a live server or shared database.
 - LocalStorage data stays in the browser/device where it was entered.
-- The original Class 12 Python/MySQL project inspired this project. The current implementation is a simple HTML/CSS/JavaScript version to meet CSD0111 requirements.
 - The sample Excel records are prepared separately for the assignment workbook.
 
 ## Student details
 - Name: Shaury Sharma
-- Roll number: [Add roll number]
-- Course/Section: [Add course and section]
-- Faculty: [Add faculty name]
-
+- Roll number: BETN1CS26208
+- Course/Section:  B.Tech CSE | Semester: 1st Semester
+- Faculty: Dr. Anjali Kedawat
 ## Folder contents
 - `01_Word_Documentation/` – report in DOCX and PDF
 - `02_Excel_Workbook/` – sample inventory workbook
 - `03_PowerPoint/` – presentation
 - `04_Website/` – website source code
-- `05_Screenshots/` – add at least five screenshots of the working website
+- `05_Screenshots/` – Six screenshots of the working website
